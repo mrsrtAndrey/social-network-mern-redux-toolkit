@@ -1,0 +1,77 @@
+@import '../../assets/scss/variables.scss';
+
+.auth_page{
+   background-color: $color-background-main;
+   padding: 40px 30px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.title{
+   font-weight: 800;
+   margin: 0;
+}
+
+.sub_title{
+   margin: 15px 0 30px 0;
+   text-align: center;
+}
+
+.form{
+   background-color: white;
+   border-radius: $border-radius;
+   box-shadow: 0 0 30px 10px rgba(0,0,0,0.05);
+   display:inline-flex;
+   gap: 30px;
+   flex-direction: column;
+   justify-content: center;
+   align-items:stretch;
+   text-align: center;
+   padding: 40px;
+
+   h5{
+      margin: 0 0 50px 0;
+   }
+
+   .group_btn{
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+   }
+
+   .text_hr{
+      margin: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 18px;
+      h3{
+         margin: 0;
+      }
+      span{
+         width: 100%;
+         border-bottom: 1px solid rgba(0,0,0,0.15);
+      }
+   }
+
+   .inputs{
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+   }
+
+   .link{
+      align-self: center;
+      text-decoration: none;
+      color: $color-blue;
+      font-weight: bold;
+      transition: 0.1s;
+   }
+   .link:hover{
+      transition: 0.1s;
+      text-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+   }
+}

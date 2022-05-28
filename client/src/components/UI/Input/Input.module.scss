@@ -1,0 +1,45 @@
+@import "../../../assets/scss/variables.scss";
+
+.box_input{
+   display: flex;
+
+   svg {
+      position: absolute;
+      height: 100%;
+      font-size: 1.05rem;
+   }
+
+   .icon{
+      position: relative;
+      left: 12px;
+   }  
+
+   .eye{
+      cursor: pointer;
+      position: relative;
+      right: 32px;
+   }
+}
+
+.input{
+   border-radius: $border-radius;
+   font-size: 1rem;
+   padding: 7px 40px 7px 0;
+   padding-left: 40px;
+   color: $color-font;
+   border: 2px solid $color-grey-hover;
+   width: 100%;
+}
+
+.input:focus{
+   outline: none;
+   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.error{
+   color: $color-red;
+   margin: 5px 0 0 4px;
+   text-align: left;
+   font-size: 0.8rem;
+   font-weight: 700;
+}
