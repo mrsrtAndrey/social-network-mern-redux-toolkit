@@ -1,11 +1,12 @@
 @import '../../assets/scss/variables.scss';
 
 .nav{
-   padding: 18px $padding-page $padding-page $padding-page;
+   padding: $border-radius 1rem;
    display: flex;
    justify-content: space-between;
+   gap: 7px;
    align-items: center;
-   border-bottom: 2px solid $color-grey-hover;
+   border-bottom: 2px solid var(--color-grey);
 }
 
 .plus{
@@ -21,22 +22,45 @@
 }
 
 .logo{
-   margin: 0;
+   margin: 0 20px 0 0;
    padding: 0;
    cursor: pointer;
    user-select: none;
+}
+
+.logo_svg{
+   height: 37px;
+   width: auto;
+   fill: var(--text-color);
+   // stroke: var(--text-color);
+   // stroke-width: 70px;
 }
 
 .nav_left{
    display: flex;
    justify-content: center;
    align-items: center;
-   gap: 15px;
+   .nav_left_main{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+
+      input[type="text"] {
+         background-color: var(--color-grey);
+      }
+   
+      .icon_input{
+         color: $color-font-light;
+      }
+   }
 }
 
 .icon_user{
    position: relative;
-   z-index: 1;
+   z-index: 2;
+   display: flex;
+   align-items: center;
    .toggle{
       position: absolute;
       z-index: 2;
@@ -50,57 +74,33 @@
    .toggle:hover{
       cursor: pointer;
    }
-   .toggle:checked ~ .menu{
-      height: auto;
-      padding: 16px;
-      transition: all 0.1s linear;
-      overflow: visible;
-      box-shadow: 0 0 10px 10px rgba(0,0,0,0.05);
-   }
-   .menu{
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 5px;
-      transition: all 0.05s linear;
-      overflow: hidden;
-      height: 0px;
-      position: absolute;
-      right: 0;
-      list-style: none;
-      padding: 0;
-      background-color: white;
-      border-radius: $border-radius;
-      box-shadow: 0 0 10px 10px transparent;
+}
 
-      li{
-         white-space: nowrap;
-         align-self: center;
-         text-decoration: none;
-         color: $color-blue;
-         font-weight: bold;
-         transition: 0.1s;
-         a{
-            color: $color-blue;
-            text-decoration: none;
-         }
-      }
-      li:hover{
-         cursor: pointer;
-         transition: 0.1s;
-         text-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+@media screen and (max-width: $laptop-md) {
+   .nav_left{
+      gap: 12px;
+      .nav_left_main{
+         gap: 12px;
       }
    }
-   .menu::before{
-      content: "";
-      position: absolute;
-      top: -8px;
-      right: 12px;
-      color: white;
-      width: 0px;
-      height: 0px;
-      border-bottom: 8px solid;
-      border-left: 15px solid transparent;
-      box-shadow: 0 0 30px 10px rgba(0,0,0,0.04);
+   
+   /* Бургер */
+   .menu_btn > span,
+   .menu_btn > span::before,
+   .menu_btn > span::after {
+      position: relative;
+      display: block;
+      width: 2rem;
+      height: 0.2rem;
+      background-color: #616161;
+      transition-duration: .25s;
+   }
+   .menu_btn > span::before {
+      content: '';
+      top: -0.7rem;
+   }
+   .menu_btn > span::after {
+      content: '';
+      top: 0.5rem;
    }
 }

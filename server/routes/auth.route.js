@@ -86,10 +86,10 @@ router.post('/login',
          const token = jwtToken.sign(
             {userId: user.id},
             jwtSecret,
-            {expiresIn: '12h'}
+            {expiresIn: '1h'}
          )
 
-         res.json({token, name: user.name, userId: user.id})
+         res.json({token, name: user.name, userId: user.id, imgUrlAvatar: user.imgUrlAvatar})
 
       }
       catch(error){

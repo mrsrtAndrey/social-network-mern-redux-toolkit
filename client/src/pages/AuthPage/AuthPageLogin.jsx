@@ -7,14 +7,14 @@ import {Link} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 
 import { useDispatch, useSelector } from "react-redux";
-import { authLogin, clearMessage } from "../../store/user/userSlice";
+import { authLogin, clearMessage } from "../../store/auth/authSlice";
 import Loader from "../../components/UI/Loader/Loader";
 
 const AuthPageLogin = () => {
    const {register, handleSubmit, formState: {errors}} = useForm();
 
    const [loading, setLoading] = useState(false);
-   const { message} = useSelector((state) => state.users);
+   const { message} = useSelector((state) => state.auth);
    const dispatch = useDispatch();
 
    useEffect(() => {

@@ -2,9 +2,15 @@ import React from "react";
 import {Navigate, Routes, Route } from 'react-router-dom'
 import AuthPage from "../pages/AuthPage/AuthPage";
 import Home from "../pages/Home/Home";
-import Profile from "../pages/Profile/Profile";
+import UserPage from "../pages/UserPage/UserPage"
 import SidebarUser from '../components/SidebarUser/SidebarUser';
 import Error404 from "../pages/Error/Error404";
+import SettingsPage from "../pages/SettingsPage/SettingsPage";
+import Bookmark from "../pages/Bookmark/Bookmark";
+import PeoplePage from "../pages/PeoplePage/PeoplePage"
+
+import SidebarGlobalUser from "../components/SidebarUser/SidebarUserGlobal"
+import HomeGlobal from "../pages/Home/HomeGlobal"
 
 const useRouters = (isLogin) => {
    if(isLogin){
@@ -13,7 +19,13 @@ const useRouters = (isLogin) => {
             <SidebarUser/>
             <Routes>
                <Route path={'/'} element={<Home/>}/>
-               <Route path={'/myprofile'} element={<Profile/>}/>
+               <Route path={'/mypage'} element={<UserPage/>}/>
+               <Route path='/user/:id' element={<UserPage/>}/>
+               <Route path={'/settings'} element={<SettingsPage/>} />
+               <Route path={'/bookmark'} element={<Bookmark/>}/>
+               <Route path={'/people'} element={<PeoplePage/>}/>
+               <Route path={'/people/followers/:id'} element={<PeoplePage/>}/>
+               <Route path={'/people/following/:id'} element={<PeoplePage/>}/>
                <Route path="/auth/login" element={<Navigate to={'/'}/>} />
                <Route path="/auth/register" element={<Navigate to={'/'}/>} />
                <Route path={'/error'} element={<Error404/>}/>
@@ -24,6 +36,12 @@ const useRouters = (isLogin) => {
    }
    return (
       <Routes>
+         <Route path={'/'} element={ 
+            <section className='main'>
+               <SidebarGlobalUser/>
+               <HomeGlobal/>
+            </section>
+         }/>
          <Route path={'/auth/*'} element={<AuthPage/>}/>
          <Route path="*" element={<Navigate to={'/auth/login'}/>} />
       </Routes>

@@ -13,6 +13,22 @@ const schema = new Schema({
    password: {
       type: String,
       require: true
+   },
+   imgUrlAvatar: {
+      type: String,
+      default: null
+   },
+   followers: {
+      type: [{
+         type: Types.ObjectId,
+         ref: "User"
+      }],
+   },
+   following: {
+      type: [{
+         type: Types.ObjectId,
+         ref: "User"
+      }],
    }
 })
 

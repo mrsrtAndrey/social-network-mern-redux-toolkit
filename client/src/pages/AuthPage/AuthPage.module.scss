@@ -1,11 +1,12 @@
 @import '../../assets/scss/variables.scss';
 
 .auth_page{
-   background-color: $color-background-main;
-   padding: 40px 30px;
+   background-color: var(--color-background-main);
+   height: calc(100vh - 5rem);
+   box-sizing: border-box;
+   padding: 2rem 2rem 5rem 2rem;
    display: flex;
    flex-direction: column;
-   justify-content: center;
    align-items: center;
 }
 
@@ -15,31 +16,34 @@
 }
 
 .sub_title{
-   margin: 15px 0 30px 0;
+   margin: 1.3rem 1rem;
    text-align: center;
 }
 
 .form{
-   background-color: white;
+   background-color: var(--background-color);
    border-radius: $border-radius;
    box-shadow: 0 0 30px 10px rgba(0,0,0,0.05);
    display:inline-flex;
-   gap: 30px;
+   gap: 2rem;
    flex-direction: column;
    justify-content: center;
    align-items:stretch;
    text-align: center;
-   padding: 40px;
+   padding: 2rem 2.5rem;
 
    h5{
-      margin: 0 0 50px 0;
+      margin: 0 0 2.5rem 0;
    }
 
    .group_btn{
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 1.2rem;
+      div, button{ 
+         flex-grow: 1;
+      }
    }
 
    .text_hr{
@@ -47,7 +51,7 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      gap: 18px;
+      gap: 1.2rem;
       h3{
          margin: 0;
       }
@@ -60,13 +64,10 @@
    .inputs{
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 1rem;
    }
 
    .link{
-      align-self: center;
-      text-decoration: none;
-      color: $color-blue;
       font-weight: bold;
       transition: 0.1s;
    }

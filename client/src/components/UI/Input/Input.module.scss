@@ -7,6 +7,7 @@
       position: absolute;
       height: 100%;
       font-size: 1.05rem;
+      color: var(--text-color) !important;
    }
 
    .icon{
@@ -24,12 +25,22 @@
 .input{
    border-radius: $border-radius;
    font-size: 1rem;
-   padding: 7px 40px 7px 0;
-   padding-left: 40px;
-   color: $color-font;
-   border: 2px solid $color-grey-hover;
+   padding: 0.6rem 2.5rem 9px 0;
+   padding-left: 2.7rem;
+   color: var(--text-color);
+   background-color: var(--color-background-main);
+   border: 2px solid var(--color-grey);
    width: 100%;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+   background-color: red !important;
+}
+
 
 .input:focus{
    outline: none;

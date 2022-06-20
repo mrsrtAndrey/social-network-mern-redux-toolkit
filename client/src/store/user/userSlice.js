@@ -1,116 +1,128 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import AuthService from "../../services/Auth/auth.service";
+import { authLogout } from '../auth/authSlice'
+import authService from '../../services/Auth/auth.service'
+import axios from "axios"
+import authHeader from '../../services/Auth/header'
 
-const user = JSON.parse(localStorage.getItem("user"));
+const API_URL = process.env.REACT_APP_API_URL
 
-export const authRegister = createAsyncThunk(
-   "auth/authRegister",
-   async ({ email, name, password }, thunkAPI) => {
-      try {
-         const response = await AuthService.register(email, name, password);
-         thunkAPI.dispatch(setMessage(response.data.message));
-         return response.data;
-      } 
-      catch (error) {
-         const message =
-         (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-            error.message ||
-            error.toString();
-         thunkAPI.dispatch(setMessage(message));
-         return thunkAPI.rejectWithValue();
-     }
+const initialState = {
+   user: null,
+   isLoggedIn: false,
+   message: null
+}
+
+export const getUser = createAsyncThunk(
+   'posts/getUser',
+   async (userId, thunkAPI) => {
+      try{
+         const res = await axios.get(API_URL + 'api/user/'+ userId, {
+            headers: authHeader()
+         })
+         if(res.statusText !== 'OK'){
+            throw new Error('Server error');
+         }
+         thunkAPI.dispatch(setUser(res.data))
+      }
+      catch(error){
+         if(authService.isAuth(error.response.status)){
+            thunkAPI.dispatch(authLogout())
+         }
+         else{
+            return thunkAPI.rejectWithValue(error.message)
+         }
+      }
    }
- );
+)
 
-export const authLogin = createAsyncThunk(
-   "auth/authLogin",
-   async ({ email, password }, thunkAPI) => {
-      try {
-         const data = await AuthService.login(email, password);
-         return { user: data };
-      } 
-      catch (error) {
-         const message =
-            (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-            error.message ||
-            error.toString();
-         thunkAPI.dispatch(setMessage(message));
-         return thunkAPI.rejectWithValue();
-     }
+//Подписаться
+export const setSubscribe = createAsyncThunk(
+   'post/setSubscribe',
+   async (userId, thunkAPI) => {
+      try{
+         await axios.get(API_URL + 'api/user/subscribe/'+ userId, {
+            headers: authHeader()
+         })
+         thunkAPI.dispatch(subscribe())
+      }
+      catch(error){
+         if(authService.isAuth(error.response.status)){
+            thunkAPI.dispatch(authLogout())
+         }
+         else{
+            return thunkAPI.rejectWithValue(error.message)
+         }
+      }
    }
- );
+)
 
-
-
-export const authLogout = createAsyncThunk(
-   "auth/authLogout", 
-   async (_, thunkAPI) => {
-      await AuthService.logout();
-      thunkAPI.dispatch(clearUser());
-      return thunkAPI.rejectWithValue();
+// Отписаться
+export const setUnsubscribe = createAsyncThunk(
+   'post/setUnsubscribe',
+   async (userId, thunkAPI) => {
+      try{
+         await axios.get(API_URL + 'api/user/unsubscribe/'+ userId, {
+            headers: authHeader()
+         })
+         thunkAPI.dispatch(unsubscribe())
+      }
+      catch(error){
+         if(authService.isAuth(error.response.status)){
+            thunkAPI.dispatch(authLogout())
+         }
+         else{
+            return thunkAPI.rejectWithValue(error.message)
+         }
+      }
    }
-);
+)
 
-
- const initialState = user
-   ? { 
-      user,
-      isLoggedIn: true, 
-      message: null
-   }
-   : { 
-      user: null,
-      isLoggedIn: false, 
-      message: null
-   };
-
- const authSlice = createSlice({
-   name: "auth",
+export const userSlice = createSlice({
+   name: 'user',
    initialState,
    reducers: {
+      setUser: (state, action) => {
+         state.user = action.payload
+      },
       setMessage: (state, action) => {
          state.message = action.payload
       },
       clearMessage: (state) => {
          state.message = ""
       },
-      clearUser: ()=>{
+      clearUser: () => {
          return { 
             user: null,
             isLoggedIn: false, 
             message: null
          }
+      },
+      subscribe: (state) => {
+         state.user.isFollower = true
+         state.user.countFollowers += 1
+      },
+      unsubscribe: (state) => {
+         state.user.isFollower = false
+         state.user.countFollowers -= 1
       }
    },
    extraReducers: {
-      [authRegister.fulfilled]: (state, action) => {
-         state.isLoggedIn = false;
-      },
-      [authRegister.rejected]: (state, action) => {
-         state.isLoggedIn = false;
-      },
-      [authLogin.pending]: (state, action) => {
+      [getUser.pending]: (state, action) => {
          state.isLoggedIn = false;
          state.user = null;
       },
-      [authLogin.fulfilled]: (state, action) => {
+      [getUser.fulfilled]: (state, action) => {
          state.isLoggedIn = true;
-         state.user = action.payload.user;
       },
-      [authLogin.rejected]: (state, action) => {
+      [getUser.rejected]: (state, action) => {
+         console.log("Ошибка")
          state.isLoggedIn = false;
-         state.user = null;
+         // state.user = null;
       },
-   },
- });
+   }
+})
 
+export const { setUser, subscribe, unsubscribe } = userSlice.actions;
+export default userSlice.reducer
 
- export const { setMessage, clearMessage, clearUser } = authSlice.actions
-
- const { reducer } = authSlice;
- export default reducer;
 

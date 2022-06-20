@@ -8,14 +8,14 @@ import {useForm} from 'react-hook-form'
 
 
 import {useDispatch, useSelector} from 'react-redux'
-import { authRegister, clearMessage } from '../../store/user/userSlice'
+import { authRegister, clearMessage } from '../../store/auth/authSlice'
 import Loader from '../../components/UI/Loader/Loader'
 import { useNavigate } from "react-router-dom";
  
 const AuthPageRegister = () => {
    const {register, handleSubmit, watch, formState: {errors}} = useForm();
    const [loading, setLoading] = useState(false);   //?
-   const {message } = useSelector((state) => state.users);
+   const {message } = useSelector((state) => state.auth);
    const dispatch = useDispatch()
    const navigate = useNavigate();
 
@@ -58,7 +58,7 @@ const AuthPageRegister = () => {
             </div>
             <div className={styles.text_hr}>
                <span></span>
-               <h3>OR</h3>
+               <h3>ИЛИ</h3>
                <span></span>
             </div>
             <div className={styles.inputs}>

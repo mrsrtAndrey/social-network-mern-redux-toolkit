@@ -1,8 +1,12 @@
+$font-size-main: 14px;
+ 
+
 
 //Цвета:
 $color-blue: #1877f2;
 $color-blue-hover: #1366d1;
-$color-red: #ff4154;
+$color-red: #e34757;
+$colot-grey: #acb6c4;
 $color-background-main: #fafbfc;
 $color-background-header: #f1f1f1;
 $color-grey-hover: #f4f5f8;
@@ -17,17 +21,20 @@ $laptop-md: 720px;
 $laptop-sm: 540px;
 
 //Block
-$border-radius: 12px;
-$width-sidebar: 300px;
+$border-radius: 0.8rem;
+$width-sidebar: 19rem;
 
 //IconUser
-$size-icon: 40px;
+$size-icon: 2.5rem;
 
 
 //Отступы
-$padding-page: 15px;
-$padding-button: 8px 17px;
+$padding-page: 1rem;
+$padding-box: 0.8rem 1.4rem;
+$padding-button: 0.5rem 1.1rem;
 
+$md-padding-page: 10px;
+$md-padding-button: 8px 17px;
 
 
 //Loading

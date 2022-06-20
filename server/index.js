@@ -1,18 +1,26 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors');
-const {authHandler} = require('./middleware/authMiddleware')
+const path = require('path')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// cors
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: true, credentials: true })); // cors
 app.use(express.json({extensions: true})) //Для понимание сервером фаормата json
+
+
+app.use('/static/images', express.static(path.join(__dirname, 'static/images')))
 
 app.use('/api/auth', require('./routes/auth.route'))
 
 app.use('/api/user', require('./routes/user.route'))
+
+app.use('/api/posts', require('./routes/posts.route'))
+
+app.use('/api/bookmark', require('./routes/bookmark.route'))
+
+app.use('/api/people', require('./routes/people.route'))
 
 
 const start = async () => {

@@ -16,6 +16,10 @@
    overflow: hidden;
    cursor: pointer;
    transition: linear 0.2s;
+
+   svg{
+      font-size: 1.3rem;
+   }
 }
 
 .btn:hover{
@@ -69,9 +73,9 @@
 // btn_empty
 
 .btn_empty{
-   color: $color-font;
-   background: white;
-   border: 2px solid $color-grey-hover;
+   color: var(--text-color);
+   background: var(--color-background-main);
+   border: 2px solid var(--color-grey);
 }
 
 .btn_empty:hover::after {
@@ -80,9 +84,9 @@
 
 .btn_empty:active::after{
    transition: 0.1s;
-   background-color: $color-grey-hover;
+   background-color: var(--color-grey);
 }
 
 .btn_empty::after{
-   background-color: white;
+   background-color: var(--color-grey);
 }

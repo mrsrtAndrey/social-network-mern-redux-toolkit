@@ -1,116 +1,22 @@
-@import '../../assets/scss/variables.scss';
-
-.ProseMirror:is(:focus, :valid) ~ .btn_group
-{
-   background-color: aquamarine;
-}
-
-
-.textarea{
-   outline: none;
-   padding: 4px 0;
-
-   .editor-container{
-      display: flex;
-      gap: 20px;
-
-      .editor{
-         flex: 1;
-         height: 35px;
-         transition: all 0.3s ease-in;
-         overflow-y: auto;
-         padding-top: 8px;
-      }
-      .editor.active{
-         transition: all 0.4s ease-out;
-         height: 300px;
-      }
-
-      .editor::-webkit-scrollbar{
-         width: 10px;
-         border-radius: 10px;
-      }
-      .editor::-webkit-scrollbar-thumb{
-         border-radius: 10px;
-         background-color: $color-font-light;
-      }
-      .editor::-webkit-scrollbar-track{
-         background-color: $color-background-main;
-      }
-   }
-
-   .btn_group{
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: auto;
-
-      .btn_editor{
-         display: flex;
-         gap: 10px;
-      }
-
-      ul{
-         display: flex;
-         margin: 5px 0;
-         padding: 0;
-         gap: 1px;
-
-         li{
-            list-style: none;
-            padding:  4px 8px;
-            border: 2px solid $color-blue;
-            border-radius: 4px;
-            cursor: pointer;
-            user-select: none; 
-            box-shadow: 0 5px 10px 2px rgba(0,0,0,0.07);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-         }
-         li:first-of-type{
-            border-radius: 10px 4px 4px 10px;
-         }
-         li:last-of-type{
-            border-radius: 4px 10px 10px 4px;
-         }
-         li.is-active{
-            background-color: $color-blue;
-            color: white;
-         }
-         li:hover{
-            transform: scale(1.1);
-            box-shadow: 0 3px 5px 2px rgba(0,0,0,0.15);
-         }
-      }
-   }
-
-   .btn_group.hide{
-      display: none;
-   }
-   .btn_group.show{
-      display: flex;
-   }
-
-   .ProseMirror{
-      box-sizing: border-box;
-      width: 100%;
-      font-size: 1rem;
-      outline: none;
-      resize: none;
-      border-color: transparent;
-      transition: 0.3s ease-in;
-      overflow-y: auto;
-   }
-}
+@import './variables.scss';
 
 // .ProseMirror:is(:focus, :valid){
 //    transition: 0.4s ease-out;
 //    height: 160px;
 // }
 
-.ProseMirror {
+.ProseMirror{
+   box-sizing: border-box;
+   width: 100%;
+   font-size: 1rem;
+   outline: none;
+   resize: none;
+   border-color: transparent;
+   transition: 0.3s ease-in;
+   overflow-y: auto;
+}
+
+.ProseMirror, .postText {
    * {
      margin: 0.2em 0;
      word-break: break-word;
@@ -131,6 +37,10 @@
    h6 {
      line-height: 1;
    }
+
+   h1{
+      font-size: 2rem;
+   }
  
    code {
      background-color: rgba(#616161, 0.1);
@@ -139,7 +49,7 @@
 
    .code-block select{
       padding: 4px 8px;
-      border-radius: 6px;
+      border-radius: $border-radius;
       font-weight: 600;
       background-color: $color-background-main;
    }
@@ -161,7 +71,7 @@
       color: #fff;
       font-family: "JetBrainsMono", monospace;
       padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
+      border-radius: $border-radius;
   
       code {
         color: inherit;
@@ -225,9 +135,10 @@
  
    img {
       display: block;
-      margin: 0 auto;
+      margin: 8px auto;
       max-width: 100%;
       height: auto;
+      border-radius: $border-radius;
    }
  
    hr {
